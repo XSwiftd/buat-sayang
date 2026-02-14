@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+    <title>💝 Selamat Hari Valentine, Melfia! 💝</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", "Brush Script MT", cursive, system-ui, -apple-system, sans-serif;
+            background: linear-gradient(145deg, #ffe6f0 0%, #ffd9e8 40%, #ffe0f0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 10px;
+            position: relative;
+            overflow-x: hidden;
+            transition: background 0.5s ease;
+        }
+
+        /* animasi background floating hati */
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .heart-float {
+            position: absolute;
+            font-size: 1.8rem;
+            opacity: 0.5;
+            color: #ff99bb;
+            animation: floatUp 10s linear infinite;
+            user-select: none;
+        }
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(100vh) rotate(0deg) scale(0.8);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(20deg) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* animasi bunga jatuh */
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+        }
+        
+        .flower {
+            position: fixed;
+            font-size: 2rem;
+            pointer-events: none;
+            z-index: 999;
+            animation: fall 8s linear forwards;
+        }
+
+        /* container utama */
+        .valentine-card {
+            max-width: 750px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 48px 24px 48px 24px;
+            box-shadow: 0 30px 50px rgba(220, 80, 120, 0.25), 0 0 0 4px #fff3f8 inset, 0 0 0 6px #ffb6c1 inset;
+            padding: 30px 20px 40px 20px;
+            position: relative;
+            z-index: 10;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+
+        /* dekorasi pita / love */
+        .ribbon-decoration {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ff4d6d;
+            color: white;
+            padding: 10px 30px;
+            border-radius: 40px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            box-shadow: 0 6px 0 #b32e4a, 0 10px 20px rgba(255, 70, 120, 0.4);
+            letter-spacing: 2px;
+            white-space: nowrap;
+            font-family: "Courier New", monospace;
+        }
+
+        .ribbon-decoration span {
+            display: inline-block;
+            animation: littleBeat 1.4s infinite;
+        }
+
+        @keyframes littleBeat {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.2); color: #fffbc2; }
+            50% { transform: scale(1.1); }
+            70% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        /* foto area dengan bingkai */
+        .photo-frame {
+            margin: 50px auto 30px auto;
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffb3c6, #ff8aae);
+            padding: 8px;
+            box-shadow: 0 15px 25px #ffb3c6, 0 0 0 5px #ffeef2;
+            transition: transform 0.4s ease;
+            animation: softGlow 2.5s infinite alternate;
+            cursor: pointer;
+        }
+
+        @keyframes softGlow {
+            0% { box-shadow: 0 10px 25px #ff99bb, 0 0 0 5px #ffeef2; }
+            100% { box-shadow: 0 20px 35px #ff6688, 0 0 0 7px #ffffff; }
+        }
+
+        .photo-frame:hover {
+            transform: scale(1.02) rotate(1deg);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid white;
+            display: block;
+            background: #ffe2f0;
+        }
+
+        .photo-frame .default-couple {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #ffe2f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4.5rem;
+            background-image: radial-gradient(circle at 30% 40%, #ffb6c1 5%, transparent 15%),
+                              radial-gradient(circle at 70% 40%, #ffb6c1 5%, transparent 15%),
+                              linear-gradient(145deg, #ffc0cb, #ffb3c6);
+            color: #b3405a;
+            border: 3px solid white;
+            text-shadow: 2px 2px 0 #fff;
+        }
+
+        /* nama & panggilan */
+        .greeting {
+            text-align: center;
+            margin: 10px 0 10px;
+        }
+
+        .greeting h2 {
+            font-size: 2.3rem;
+            font-family: "Brush Script MT", cursive, "Segoe UI";
+            color: #ac2e4b;
+            background: linear-gradient(45deg, #d43f63, #b3244b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 6px;
+            text-shadow: 0 2px 10px #ffbfd4;
+        }
+
+        .greeting h3 {
+            font-size: 1.8rem;
+            color: #cc4765;
+            font-family: "Brush Script MT", cursive;
+            border-bottom: 2px dashed #ffa5c3;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* kotak pesan cinta */
+        .love-letter {
+            background: rgba(255, 240, 245, 0.8);
+            backdrop-filter: blur(2px);
+            padding: 25px 20px;
+            border-radius: 60px 20px 60px 20px;
+            margin: 20px 0 30px;
+            box-shadow: 0 8px 0 #e6a0b5, 0 15px 25px rgba(200, 100, 130, 0.3);
+            border: 2px solid white;
+            position: relative;
+        }
+
+        .love-letter p {
+            font-size: 1.4rem;
+            line-height: 2rem;
+            color: #3f202b;
+            text-align: center;
+            font-family: "Georgia", "Times New Roman", serif;
+            font-weight: 500;
+            word-spacing: 2px;
+            text-shadow: 0 1px 0 white;
+        }
+
+        .love-letter .signature {
+            display: block;
+            margin-top: 20px;
+            font-size: 2rem;
+            font-family: "Brush Script MT", cursive;
+            color: #b13e5c;
+            text-align: right;
+            transform: rotate(-3deg);
+        }
+
+        /* tombol kejutan */
+        .surprise-btn {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+
+        .surprise-btn button {
+            background: #ff4d6d;
+            border: none;
+            font-size: 1.4rem;
+            padding: 14px 35px;
+            border-radius: 60px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 7px 0 #a1334b, 0 10px 25px #fbaac3;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            border: 2px solid #ffe5ec;
+            letter-spacing: 1px;
+        }
+
+        .surprise-btn button:active {
+            transform: translateY(6px);
+            box-shadow: 0 2px 0 #a1334b, 0 5px 15px #fbaac3;
+        }
+
+        .extra-message {
+            background: #fff0f5e0;
+            border-radius: 30px;
+            padding: 16px 20px;
+            margin-top: 25px;
+            font-size: 1.4rem;
+            text-align: center;
+            color: #972b47;
+            border-left: 10px solid #ff8db3;
+            border-right: 10px solid #ff8db3;
+            font-weight: 500;
+            transition: all 0.5s;
+            backdrop-filter: blur(2px);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* animasi love tambahan */
+        .tiny-heart {
+            display: inline-block;
+            animation: bounce 1.2s infinite;
+            transform-origin: center;
+            font-size: 2rem;
+            filter: drop-shadow(0 4px 4px #ff9dbb);
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(8deg) scale(1.1); }
+        }
+
+        /* hiasan sudut */
+        .corner-heart {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.4;
+            z-index: 5;
+        }
+
+        .corner-left {
+            top: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+
+        .corner-right {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(25deg);
+        }
+
+        /* footer */
+        .footer-note {
+            margin-top: 18px;
+            color: #ac4c68;
+            font-size: 1.2rem;
+            font-style: italic;
+            z-index: 10;
+            position: relative;
+            background: #ffeef4cc;
+            padding: 6px 20px;
+            border-radius: 40px;
+            backdrop-filter: blur(2px);
+        }
+
+        /* fitur baru styling */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 100;
+        }
+        
+        .music-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 25px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.05);
+            background: #ff3355;
+        }
+        
+        .countdown-container {
+            text-align: center;
+            margin: 20px 0;
+            background: #ffe4f0;
+            padding: 15px;
+            border-radius: 50px;
+            border: 2px solid white;
+        }
+        
+        .countdown-container p {
+            font-size: 1.2rem;
+            color: #ac2e4b;
+            margin-bottom: 5px;
+        }
+        
+        #timer {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d43f63;
+            font-family: monospace;
+        }
+        
+        .secret-message-area {
+            margin: 30px 0;
+            text-align: center;
+        }
+        
+        #secretMessage {
+            width: 80%;
+            padding: 15px;
+            border-radius: 30px;
+            border: 3px solid #ffb3c6;
+            background: #fff0f5;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            resize: none;
+        }
+        
+        .send-btn {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+        
+        .send-btn:hover {
+            background: #ff3355;
+            transform: scale(1.05);
+        }
+        
+        .gallery-slider {
+            margin: 30px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 20px 0;
+            -webkit-overflow-scrolling: touch;
+        }
+        
+        .gallery-item {
+            display: inline-block;
+            width: 150px;
+            height: 150px;
+            margin: 0 10px;
+            border-radius: 30px;
+            background: #ffe2f0;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px #ffb3c6;
+            overflow: hidden;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .gallery-caption {
+            text-align: center;
+            color: #ac2e4b;
+            margin-top: -10px;
+            font-style: italic;
+        }
+        
+        .reasons-container {
+            background: white;
+            border-radius: 30px;
+            padding: 20px;
+            margin: 30px 0;
+            border: 3px solid #ffb3c6;
+        }
+        
+        .reasons-container h3 {
+            color: #d43f63;
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .reasons-list {
+            list-style-type: none;
+        }
+        
+        .reasons-list li {
+            line-height: 2;
+            font-size: 1.2rem;
+            padding: 5px 10px;
+            border-bottom: 1px dashed #ffb3c6;
+        }
+        
+        .reasons-list li:before {
+            content: "❤️ ";
+            color: #ff4d6d;
+        }
+        
+        .last-reason-btn {
+            background: #ffb3c6;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            border-radius: 30px;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            cursor: pointer;
+            border: 2px solid white;
+            transition: all 0.3s;
+            color: #ac2e4b;
+            font-weight: bold;
+        }
+        
+        .last-reason-btn:hover {
+            background: #ff99b5;
+            transform: scale(1.02);
+        }
+        
+        .theme-selector {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .theme-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+        
+        .theme-btn:hover {
+            transform: scale(1.1);
+            border-color: #ff4d6d;
+        }
+        
+        .theme-pink { background: linear-gradient(145deg, #ffe6f0, #ffd9e8); }
+        .theme-purple { background: linear-gradient(145deg, #f0e6ff, #e6d9ff); }
+        .theme-red { background: linear-gradient(145deg, #ffe6e6, #ffcccc); }
+        
+        #quoteBox {
+            font-style: italic;
+            font-size: 1.3rem;
+            text-align: center;
+            margin: 20px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 50px;
+            border: 2px solid white;
+            color: #ac2e4b;
+            transition: all 0.5s;
+        }
+        
+        /* responsif */
+        @media (max-width: 500px) {
+            .valentine-card { padding: 20px 16px 30px; }
+            .photo-frame { width: 160px; height: 160px; margin-top: 60px; }
+            .greeting h2 { font-size: 1.9rem; }
+            .greeting h3 { font-size: 1.5rem; }
+            .love-letter p { font-size: 1.2rem; line-height: 1.7rem; }
+            .ribbon-decoration { font-size: 1rem; padding: 8px 18px; }
+            #timer { font-size: 1.3rem; }
+        }
+        
+        @media (max-width: 360px) {
+            .photo-frame { width: 140px; height: 140px; }
+            .love-letter p { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body id="mainBody">
+    <!-- animasi floating heart background -->
+    <div class="floating-hearts" id="floatingHearts"></div>
+
+    <!-- hiasan pojok -->
+    <div class="corner-heart corner-left">❤️‍🔥</div>
+    <div class="corner-heart corner-right">💖</div>
+
+    <!-- tombol musik -->
+    <div class="music-control">
+        <button class="music-btn" id="musicBtn">🎵 Putar Musik</button>
+    </div>
+
+    <!-- KARTU UTAMA VALENTINE -->
+    <div class="valentine-card">
+        <div class="ribbon-decoration">
+            <span>💘 14 FEBRUARY 💘</span>
+        </div>
+
+        <!-- FOTO AREA -->
+        <div class="photo-frame" id="photoFrame">
+            <img src="sayang.jpeg" alt="Melfia" id="profileImg" onerror="this.style.display='none'; document.getElementById('coupleIcon').style.display='flex';">
+            <div class="default-couple" id="coupleIcon" style="display:none;">😊❤️😊</div>
+        </div>
+
+        <!-- Greeting -->
+        <div class="greeting">
+            <h2>Untuk 💕 Kamu</h2>
+            <h3>♡ Melfia Nasiva Valazilia ♡</h3>
+        </div>
+
+        <!-- Kata-kata kasih sayang -->
+        <div class="love-letter">
+            <p>
+                <span class="tiny-heart">❤️</span> Setiap detik bersamamu adalah anugerah. <br />
+                Senyummu hangat seperti ribuan lilin di hati. <br />
+                Maafkan aku jika masih banyak kekurangan dan salah, tapi aku berjanji akan selalu berusaha jadi yang terbaik untukmu. <br />
+                Di hari kasih sayang ini, aku ingin kamu tahu: <br />
+                <strong>"Aku menyayangimu, hari ini, esok, dan selamanya."</strong> <br />
+                <span class="tiny-heart">❤️</span>
+            </p>
+            <span class="signature">— Dari aku, <br /> untuk kamu sayangku satu-satunya</span>
+        </div>
+
+        <!-- QUOTE BERJALAN -->
+        <div id="quoteBox">
+            "Cinta adalah ketika kebahagiaannya lebih penting dari kebahagiaanmu sendiri."
+        </div>
+
+        <!-- HITUNG MUNDUR VALENTINE -->
+        <div class="countdown-container">
+            <p>❤️ Menuju Valentine berikutnya:</p>
+            <div id="timer">Menghitung...</div>
+        </div>
+
+        <!-- 10 ALASAN -->
+        <div class="reasons-container">
+            <h3>Alasan Aku Sayang Melfia:</h3>
+            <ul class="reasons-list" id="reasonsList">
+                <li>Senyummu yang selalu buat hariku cerah</li>
+                <li>Cara kamu ngelihat aku dengan penuh cinta</li>
+                <li>Kamu selalu pengertian sama aku</li>
+                <li>Setiap momen bersamamu itu berharga</li>
+                <li>Kamu bisa terima kekurangan aku</li>
+                <li>Suara tawamu itu obat penat terbaik</li>
+                <li>Kamu selalu dukung apa pun yang aku lakukan</li>
+                <li>Kamu adalah alasan aku bangun setiap pagi (walau kadang aku bangunnya siang hehe)</li>
+                <li>Kamu selalu buat aku merasa dicintai</li>
+                <li>Dan banyak lagi yang gabisa disebutin</li>
+            </ul>
+            <button class="last-reason-btn" id="lastReasonBtn">Klik untuk alasan spesial!</button>
+        </div>
+
+        <!-- PESAN RAHASIA -->
+
+        <!-- SLIDER FOTO KENANGAN -->
+        <div class="gallery-slider" id="gallerySlider">
+            <div class="gallery-item"><img src="foto1.jpeg" alt="kenangan 1" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>❤️</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto2.jpeg" alt="kenangan 2" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💕</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto3.jpeg" alt="kenangan 3" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💖</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto4.jpeg" alt="kenangan 4" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💗</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto5.jpeg" alt="kenangan 5" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💘</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto6.jpeg" alt="kenangan 6" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💝</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto7.jpeg" alt="kenangan 7" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💖</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto8.jpeg" alt="kenangan 8" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💗</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+            <div class="gallery-item"><img src="foto9.jpeg" alt="kenangan 9" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22 viewBox=%220 0 150 150%22><rect width=%22150%22 height=%22150%22 fill=%22%23ffe2f0%22/><text x=%2230%22 y=%2280%22 font-size=%2230%22>💘</text><text x=%2250%22 y=%22110%22 font-size=%2230%22>📸</text></svg>'"></div>
+        </div>
+        <p class="gallery-caption">💕 Geser untuk lihat kenangan kita 💕</p>
+
+        <!-- SELECTOR TEMA -->
+        <div class="theme-selector">
+            <button class="theme-btn theme-pink" onclick="changeTheme('pink')" title="Tema Pink"></button>
+            <button class="theme-btn theme-purple" onclick="changeTheme('purple')" title="Tema Ungu"></button>
+            <button class="theme-btn theme-red" onclick="changeTheme('red')" title="Tema Merah"></button>
+        </div>
+
+        <!-- Tombol kejutan -->
+        <div class="surprise-btn">
+            <button id="surpriseButton">💝 Klik untuk Kejutan 💝</button>
+        </div>
+
+        <!-- Pesan ekstra -->
+        <div id="extraMessage" class="extra-message hidden">
+            ✨💖 TERIMALAH BUNGA MAWAR VIRTUAL INI! 💖✨<br />
+            🌹🌹🌹🌹🌹<br />
+            Kamu adalah alasan aku tersenyum tiap hari. happy valentine, sayang!
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="footer-note">💞 for you, my Melfia, with all my heart 💞</div>
+
+    <!-- Audio tersembunyi -->
+    <audio id="bgMusic" loop>
+        <source src="sempurna.mp3" type="audio/mp3">
+        <!-- fallback jika gagal -->
+    </audio>
+
+    <script>
+        (function() {
+            // 1. Floating hearts
+            const heartsContainer = document.getElementById("floatingHearts");
+            const heartSymbols = ["❤️","🧡","💛","💚","💙","💜","🤍","💗","💖","💘","💝","🥰"];
+
+            function createHeart() {
+                const heart = document.createElement("div");
+                heart.classList.add("heart-float");
+                heart.innerText = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                const size = Math.floor(Math.random() * 30 + 20);
+                heart.style.fontSize = size + "px";
+                heart.style.left = Math.random() * 100 + "%";
+                heart.style.animationDuration = Math.random() * 7 + 6 + "s";
+                heart.style.animationDelay = Math.random() * 5 + "s";
+                heartsContainer.appendChild(heart);
+                setTimeout(() => heart && heart.remove(), 15000);
+            }
+            for (let i = 0; i < 18; i++) setTimeout(createHeart, i * 200);
+            setInterval(createHeart, 700);
+
+            // 2. Bunga jatuh
+            function createFlower() {
+                const flower = document.createElement('div');
+                flower.classList.add('flower');
+                const flowers = ['🌸', '🌼', '🌺', '🌹'];
+                flower.innerHTML = flowers[Math.floor(Math.random() * flowers.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.fontSize = (Math.random() * 30 + 20) + 'px';
+                flower.style.animationDuration = (Math.random() * 5 + 5) + 's';
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 10000);
+            }
+            setInterval(createFlower, 800);
+
+            // 3. Musik
+            const music = document.getElementById('bgMusic');
+            const musicBtn = document.getElementById('musicBtn');
+            let isPlaying = false;
+            
+            musicBtn.addEventListener('click', function() {
+                if (isPlaying) {
+                    music.pause();
+                    musicBtn.innerHTML = '🎵 Putar Musik';
+                } else {
+                    music.play().catch(() => {
+                        alert('Klik izinkan untuk memutar musik ya ❤️');
+                    });
+                    musicBtn.innerHTML = '⏸ Pause Musik';
+                }
+                isPlaying = !isPlaying;
+            });
+
+            // 4. Countdown
+            function updateCountdown() {
+                const now = new Date();
+                const nextYear = now.getFullYear() + 1;
+                const nextValentine = new Date(nextYear, 1, 14);
+                const diff = nextValentine - now;
+                
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+                
+                document.getElementById('timer').innerHTML = `${days} hari ${hours} jam ${minutes} menit ${seconds} detik`;
+            }
+            setInterval(updateCountdown, 1000);
+            updateCountdown();
+
+            // 5. Quotes berganti
+            const quotes = [
+                '"Aku mencintaimu tanpa tahu bagaimana, atau kapan, atau dari mana." - Pablo Neruda',
+                '"Cinta sejati tidak pernah memiliki akhir yang bahagia, karena cinta sejati tidak pernah berakhir."',
+                '"Kamu adalah "aku" -ku yang hilang."',
+                '"Di seluruh dunia, tidak ada hati yang lebih berharga bagiku selain hatimu."',
+                '"Bersamamu, aku belajar apa arti cinta sesungguhnya."',
+                '"Cinta bukan melihat satu sama lain, tetapi melihat ke arah yang sama."'
+            ];
+            let quoteIndex = 0;
+            setInterval(() => {
+                quoteIndex = (quoteIndex + 1) % quotes.length;
+                document.getElementById('quoteBox').innerHTML = quotes[quoteIndex];
+            }, 5000);
+
+            // 6. Surprise button
+            const surpriseBtn = document.getElementById("surpriseButton");
+            const extraMsgDiv = document.getElementById("extraMessage");
+
+            surpriseBtn.addEventListener("click", function() {
+                if (extraMsgDiv.classList.contains("hidden")) {
+                    extraMsgDiv.classList.remove("hidden");
+                    extraMsgDiv.style.animation = "softGlow 0.6s";
+                    surpriseBtn.innerText = "💌 Kejutan lagi 💌";
+                    
+                    for (let i = 0; i < 8; i++) {
+                        setTimeout(() => {
+                            const miniHeart = document.createElement("div");
+                            miniHeart.innerText = "💖";
+                            miniHeart.style.position = "fixed";
+                            miniHeart.style.left = Math.random() * 80 + 10 + "%";
+                            miniHeart.style.top = "-20px";
+                            miniHeart.style.fontSize = "2.5rem";
+                            miniHeart.style.zIndex = "999";
+                            miniHeart.style.pointerEvents = "none";
+                            miniHeart.style.animation = `floatUp ${3 + Math.random() * 3}s linear`;
+                            document.body.appendChild(miniHeart);
+                            setTimeout(() => miniHeart.remove(), 5000);
+                        }, i * 150);
+                    }
+                } else {
+                    extraMsgDiv.innerHTML = "✨💖 MELFIA, KAMU CINTAKU SATU-SATUNYA! 💖✨<br>🌹🌹🌹🌹🌹<br> Setiap hari adalah valentine bersamamu 💑";
+                    extraMsgDiv.style.background = "#ffe4ed";
+                    extraMsgDiv.style.transform = "scale(1.02)";
+                    setTimeout(() => extraMsgDiv.style.transform = "scale(1)", 200);
+                }
+                
+                const photo = document.querySelector(".photo-frame");
+                photo.style.transform = "scale(1.05)";
+                setTimeout(() => photo.style.transform = "scale(1)", 300);
+            });
+
+            // 7. Foto klik
+            const photoFrame = document.getElementById("photoFrame");
+            const coupleIcon = document.getElementById("coupleIcon");
+            const profileImg = document.getElementById("profileImg");
+            
+            photoFrame.addEventListener("click", function() {
+                if (profileImg.style.display !== 'none') {
+                    profileImg.style.display = 'none';
+                    coupleIcon.style.display = 'flex';
+                } else {
+                    profileImg.style.display = 'block';
+                    coupleIcon.style.display = 'none';
+                }
+                coupleIcon.style.transform = "rotate(3deg) scale(1.1)";
+                setTimeout(() => coupleIcon.style.transform = "rotate(0deg) scale(1)", 200);
+            });
+
+            // 8. Alasan spesial
+            const lastReasonBtn = document.getElementById('lastReasonBtn');
+            lastReasonBtn.addEventListener('click', function() {
+                this.innerText = 'KAMU ALASAN TERBAIK! Karena kamu adalah MELFIA-ku, Satu-satunya sayangku  💕';
+                this.style.background = '#ff4d6d';
+                this.style.color = 'white';
+            });
+
+            // 9. Pesan rahasia
+            const sendBtn = document.getElementById('sendSecretBtn');
+            sendBtn.addEventListener('click', function() {
+                const message = document.getElementById('secretMessage').value;
+                if (message.trim() === '') {
+                    alert('Tulis dulu pesan manisnya sayang ❤️');
+                } else {
+                    alert('❤️ Pesan tersimpan di hati! Melfia pasti senang ❤️\n\n"' + message + '"');
+                    document.getElementById('secretMessage').value = '';
+                }
+            });
+
+            // 10. Error handling foto
+            if (profileImg) {
+                profileImg.onerror = function() {
+                    this.style.display = 'none';
+                    coupleIcon.style.display = 'flex';
+                };
+            }
+        })();
+
+        // Fungsi ganti tema
+        function changeTheme(color) {
+            const body = document.getElementById('mainBody');
+            if (color === 'pink') {
+                body.style.background = 'linear-gradient(145deg, #ffe6f0, #ffd9e8)';
+            } else if (color === 'purple') {
+                body.style.background = 'linear-gradient(145deg, #f0e6ff, #e6d9ff)';
+            } else if (color === 'red') {
+                body.style.background = 'linear-gradient(145deg, #ffe6e6, #ffcccc)';
+            }
+        }
+    </script>
+</body>
+</html>
